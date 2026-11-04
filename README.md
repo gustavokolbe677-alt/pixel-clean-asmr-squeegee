@@ -1,23 +1,17 @@
-# Pixel Clean: ASMR Squeegee
+# Pixel Clean: Sand Sweep · ASMR
 
-Ein spielbarer, mobiloptimierter Browser-Prototyp des Puzzle-Konzepts. Läuft ohne Build-Schritt direkt in einem modernen Browser.
+Ein mobiloptimierter Browser-Prototyp: Wische über die körnige Pixel-Schicht, beobachte die Sandkörner beim Herunterrieseln und lege ein eigens gezeichnetes Motiv frei.
 
 ## Starten
 
-- `index.html` lokal öffnen, oder den Projektordner über einen beliebigen statischen Webserver ausliefern.
-- Auf einem Touchscreen mit dem Finger über die verschmutzte Fläche wischen. Am Desktop funktioniert die Maus.
-- Fortschritt wird lokal im Browser gespeichert.
+`index.html` direkt in einem modernen Browser öffnen oder den Ordner über einen statischen Webserver ausliefern. Auf Touchscreens mit dem Finger wischen, am Desktop mit der Maus.
 
-## Im Prototyp enthalten
+## Spielablauf
 
-- Touch-/Pointer-Wischen mit interpolierter Bewegung und zusammenhängenden Wischzügen
-- Fünf auswählbare Werkzeuge mit unterschiedlicher Wischfläche und Audiofarbe
-- 100 Level mit ansteigender Komplexität, Pixelmotiven und Hindernissen
-- Mehrfach zu reinigende Flecken, Barrieren, Eis- und Richtungssymbole
-- ASMR-Töne über Web Audio API sowie optionale Gerätehaptik
-- Neustart, Hinweis, Fortschrittsanzeige, Abschluss-Reveal und lokaler Level-Fortschritt
-- Sichtbarer Werbeplatzhalter und Demo-Button für Extra-Züge; es wird **kein echtes Werbenetzwerk** eingebunden
+- Keine Levelnummern, Zuglimits oder Timer.
+- Im Lobby-Bildschirm auf **Los geht's** tippen und in einer beliebigen Bewegung wischen.
+- Die gereinigten Pixel zerfallen in kleine, animierte Körner, fallen nach unten und geben das Bild frei.
+- Ist die Fläche vollständig sauber, erscheint automatisch die Lobby mit dem nächsten Bild.
+- Fünf Wischwerkzeuge, ASMR-Sandgeräusch, optionale Vibration und lokaler Szenenfortschritt.
 
-## Hinweise
-
-Die Motive sind zur Demonstration aus einfachen Formen generiert. Für einen Release sind eigenes/lizenziertes Bildmaterial, ausführliche Geräte- und Spieltests, Barrierefreiheitsprüfung, Datenschutzhinweise und eine altersgerechte Integration eines Werbenetzwerks erforderlich. Audio startet erst nach einer Nutzerinteraktion, wie es mobile Browser erwarten.
+Dies ist ein Frontend-Prototyp ohne externe Assets oder echtes Werbenetzwerk. Für einen Release sind Geräte- und Browser-Tests sowie eine Prüfung von Datenschutz, Barrierefreiheit und altersgerechter Monetarisierung erforderlich.
