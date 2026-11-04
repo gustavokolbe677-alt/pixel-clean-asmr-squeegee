@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#10111e">
+  <meta name="description" content="Pixel Clean: ASMR Squeegee – ein entspannendes Wisch-Puzzle für Touchscreens.">
+  <title>Pixel Clean: ASMR Squeegee</title>
+  <style>
+    :root{color-scheme:dark;--bg:#10111e;--panel:#1a1b2b;--panel2:#22243a;--ink:#f4f3ff;--muted:#a8a9c2;--cyan:#73f5e1;--pink:#ff7fbc;--gold:#ffdf8a;--line:#353750}
+    *{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 50% -20%,#2b2d49 0,transparent 55%),var(--bg);color:var(--ink);font:500 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;display:flex;justify-content:center;overscroll-behavior:none}
+    button{font:inherit;color:inherit;border:1px solid var(--line);background:var(--panel2);border-radius:14px;padding:10px 13px;cursor:pointer;touch-action:manipulation;transition:transform .12s,border-color .12s,background .12s}button:active{transform:scale(.97)}button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.app{width:min(100%,560px);padding:calc(12px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:10px}.logo{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#82f7e1,#7b83ff);color:#17192a;font-size:23px;box-shadow:0 6px 24px #73f5e133}.brand h1{font-size:17px;line-height:1.1;margin:0}.brand small{color:var(--muted);font-size:11px}.top-actions{display:flex;gap:8px}.icon-btn{width:42px;height:42px;padding:0;font-size:18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--panel);border:1px solid #2c2e45;border-radius:14px;padding:9px 12px}.stat span{display:block;color:var(--muted);font-size:11px}.stat strong{font-size:16px}.progress-wrap{height:6px;border-radius:9px;background:#282a40;overflow:hidden;margin-top:-3px}.progress{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),#a6ffd9);transition:width .18s}.board-wrap{position:relative;width:min(100%,calc((100dvh - 300px)*.643));margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid #454760;box-shadow:0 12px 40px #0005;background:#17192b;touch-action:none}.board-wrap canvas{display:block;width:100%;height:auto;touch-action:none}.overlay{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:#10111ebd;backdrop-filter:blur(5px);padding:20px;text-align:center}.overlay.show{display:flex}.modal{width:min(100%,320px);background:#202238;border:1px solid #484b68;border-radius:22px;padding:23px 20px;box-shadow:0 16px 50px #0008}.modal h2{margin:0 0 7px;font-size:25px}.modal p{margin:0 0 16px;color:#c6c7d9}.primary{background:linear-gradient(135deg,#7af2df,#a6ffd9);border:0;color:#17192a;font-weight:800}.secondary{background:#292c45}.tools-head{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px}.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.tool{padding:9px 3px 8px;min-height:66px;background:var(--panel);font-size:11px;line-height:1.15}.tool .emoji{display:block;font-size:20px;margin-bottom:4px}.tool.selected{border-color:var(--cyan);background:#1d3439;box-shadow:inset 0 0 0 1px #73f5e133}.tool:disabled{opacity:.42;filter:grayscale(.4)}.bottom-row{display:flex;gap:8px}.bottom-row button{flex:1;font-size:13px}.note{font-size:11px;text-align:center;color:var(--muted);margin:0}.ad-placeholder{border:1px dashed #3e405a;border-radius:12px;text-align:center;padding:7px;color:#8587a4;font-size:10px;letter-spacing:.04em}.ad-placeholder strong{color:#aaaBC7;font-weight:600}.toast{position:fixed;left:50%;bottom:calc(95px + env(safe-area-inset-bottom));transform:translate(-50%,12px);background:#282b43;border:1px solid #4a4e6d;padding:10px 14px;border-radius:13px;opacity:0;pointer-events:none;transition:.2s;z-index:5;white-space:nowrap;box-shadow:0 8px 22px #0006}.toast.show{opacity:1;transform:translate(-50%,0)}.small{font-size:11px;color:var(--muted)}
+    @media(max-height:700px){.app{gap:8px;padding-top:8px}.logo{width:36px;height:36px}.board-wrap{width:min(100%,calc((100dvh - 278px)*.643))}.stat{padding:6px 10px}.tools .tool{min-height:56px;padding:6px 2px}.tool .emoji{font-size:18px}}
+    @media(min-width:700px){.app{padding-top:22px}.board-wrap{width:min(100%,390px)}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div class="brand"><div class="logo" aria-hidden="true">▧</div><div><h1>Pixel Clean</h1><small>ASMR Squeegee</small></div></div>
+      <div class="top-actions"><button class="icon-btn" id="soundBtn" aria-label="Sound umschalten" title="Sound">🔊</button><button class="icon-btn" id="vibeBtn" aria-label="Vibration umschalten" title="Vibration">📳</button></div>
+    </header>
+    <section class="stats" aria-label="Level-Status">
+      <div class="stat"><span>LEVEL</span><strong id="levelText">1 / 100</strong></div>
+      <div class="stat"><span>WISCHZÜGE</span><strong id="movesText">0 / 8</strong></div>
+      <div class="stat"><span>SAUBER</span><strong id="cleanText">0%</strong></div>
+    </section>
+    <div class="progress-wrap" aria-label="Reinigungsfortschritt"><div class="progress" id="progress"></div></div>
+    <section class="board-wrap" id="boardWrap" aria-label="Puzzle-Spielfeld">
+      <canvas id="board" aria-label="Wische über das Bild, um es freizulegen"></canvas>
+      <div class="overlay" id="overlay"><div class="modal"><h2 id="resultTitle">Sauber!</h2><p id="resultText">Das Motiv ist freigelegt.</p><div style="display:flex;gap:8px;justify-content:center"><button class="secondary" id="replayBtn">Nochmal</button><button class="primary" id="continueBtn">Weiter</button></div><p class="small" style="margin:13px 0 0">Dein Fortschritt bleibt auf diesem Gerät.</p></div></div>
+    </section>
+    <section aria-label="Werkzeuge">
+      <div class="tools-head"><span>WÄHLE DEIN WERKZEUG</span><span id="toolTip">Sanft & ausgewogen</span></div>
+      <div class="tools" id="tools"></div>
+    </section>
+    <div class="bottom-row"><button class="secondary" id="restartBtn">↻ Neustart</button><button class="secondary" id="hintBtn">✦ Hinweis</button><button class="secondary" id="bonusBtn">＋ Extra-Züge <span class="small">(Demo)</span></button></div>
+    <p class="note">Finger aufsetzen und in einer fließenden Bewegung wischen. Dein bester Sweep zählt!</p>
+    <div class="ad-placeholder"><strong>WERBEFLÄCHE (PROTOTYP)</strong> · Keine Anzeige wird in diesem Build geladen</div>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+const COLS=9,ROWS=14,LEVELS=100;
+const tools=[
+ {name:'Classic',icon:'🧽',radius:.69,tip:'Sanft & ausgewogen',tone:510,wave:'sine'},
+ {name:'Schwamm',icon:'🫧',radius:.92,tip:'Breit & weich',tone:360,wave:'triangle'},
+ {name:'Laser',icon:'✨',radius:.49,tip:'Präzise & schmal',tone:720,wave:'sawtooth'},
+ {name:'Rainbow',icon:'🌈',radius:1.08,tip:'Breit & farbenfroh',tone:590,wave:'sine'},
+ {name:'Magnet',icon:'🧲',radius:.76,tip:'Zieht Pixel an',tone:440,wave:'triangle'}
+];
+const motifs=['star','planet','cat','heart','ghost','flower','rocket','cloud','game','diamond'];
+const $=id=>document.getElementById(id),canvas=$('board'),ctx=canvas.getContext('2d'),wrap=$('boardWrap');
+let level=Math.max(1,Math.min(LEVELS,Number(localStorage.getItem('pc_level')||1))),selected=0,grid=[],barriers=new Set(),moves=0,maxMoves=8,cleanPct=0,strokeCells=null,drawing=false,lastPoint=null,completed=false,extraMoves=0,audioOn=true,vibeOn=true,audioCtx=null,lastSound=0,toastTimer;
+function seeded(n){let x=(n*9301+49297)%233280;return()=>{x=(x*9301+49297)%233280;return x/233280}}
+function makeLevel(){
+ const rand=seeded(level*717+19);grid=[];barriers=new Set();moves=0;extraMoves=0;completed=false;strokeCells=null;
+ // A few safe wall segments appear as the player advances. Open gaps always remain.
+ if(level>=7){const count=Math.min(3,1+Math.floor((level-7)/28));for(let k=0;k<count;k++){const col=2+Math.floor(rand()*5),gap=2+Math.floor(rand()*(ROWS-4));for(let r=1;r<ROWS-1;r++)if(Math.abs(r-gap)>1 && !(k>0&&r%5===0))barriers.add(r*COLS+col)}}
+ for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){const i=r*COLS+c;if(barriers.has(i)){grid.push({type:'wall',stage:0,max:0});continue}let stage=1,type='dirt';if(level>=12&&rand()<Math.min(.2,.04+(level-12)*.002)){type='stain';stage=2}if(level>=32&&rand()<.035){type='ice'}if(level>=50&&rand()<.025){type='arrow'}grid.push({type,stage,max:stage,seed:rand()})}
+ maxMoves=Math.max(5,Math.min(13,8+Math.floor((level-1)/18)));$('overlay').classList.remove('show');render();updateUI();$('toolTip').textContent=tools[selected].tip;
+}
+function resize(){const rect=wrap.getBoundingClientRect(),dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.width*(ROWS/COLS)*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);render()}
+function cellSize(){return canvas.width/(Math.max(1,window.devicePixelRatio||1)*COLS)}
+function drawMotif(){const w=canvas.width/(window.devicePixelRatio||1),h=canvas.height/(window.devicePixelRatio||1),u=w/COLS,cx=w/2,cy=h/2;const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,'#262a58');grad.addColorStop(.5,'#443773');grad.addColorStop(1,'#b34c89');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+ // Original, license-safe pixel-art inspired motifs.
+ ctx.save();ctx.translate(cx,cy);ctx.shadowColor='#9ef8ed';ctx.shadowBlur=u*.3;ctx.fillStyle='#ffdc84';ctx.strokeStyle='#ffdc84';ctx.lineWidth=u*.16;
+ const motif=motifs[(level-1)%motifs.length];
+ if(motif==='star'){ctx.beginPath();for(let i=0;i<10;i++){let a=-Math.PI/2+i*Math.PI/5,r=i%2?u*1.35:u*2.9;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();ctx.fill()}
+ else if(motif==='planet'){ctx.fillStyle='#ff8dc5';ctx.beginPath();ctx.arc(0,0,u*1.9,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#a7fff0';ctx.beginPath();ctx.ellipse(0,0,u*3.1,u*.85,-.35,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#ffd879';ctx.beginPath();ctx.arc(u*.7,-u*.55,u*.48,0,7);ctx.fill()}
+ else if(motif==='cat'){ctx.fillStyle='#ffce78';ctx.beginPath();ctx.arc(0,0,u*1.8,0,7);ctx.fill();ctx.beginPath();ctx.moveTo(-u*1.4,-u*.8);ctx.lineTo(-u*1.55,-u*2.7);ctx.lineTo(-u*.15,-u*1.75);ctx.fill();ctx.beginPath();ctx.moveTo(u*1.4,-u*.8);ctx.lineTo(u*1.55,-u*2.7);ctx.lineTo(u*.15,-u*1.75);ctx.fill();ctx.fillStyle='#25243f';[-.65,.65].forEach(x=>{ctx.beginPath();ctx.arc(x*u,-u*.2,u*.12,0,7);ctx.fill()});ctx.beginPath();ctx.arc(0,u*.5,u*.42,0,Math.PI);ctx.strokeStyle='#25243f';ctx.lineWidth=u*.09;ctx.stroke()}
+ else if(motif==='heart'){ctx.fillStyle='#ff6f9f';ctx.beginPath();ctx.moveTo(0,u*2.6);ctx.bezierCurveTo(-u*4,u*.2,-u*2.3,-u*2.8,0,-u*1.1);ctx.bezierCurveTo(u*2.3,-u*2.8,u*4,u*.2,0,u*2.6);ctx.fill()}
+ else if(motif==='ghost'){ctx.fillStyle='#b9fff0';ctx.beginPath();ctx.arc(0,-u*.25,u*1.8,Math.PI,0);ctx.lineTo(u*1.8,u*2);ctx.lineTo(u*.9,u*1.45);ctx.lineTo(0,u*2);ctx.lineTo(-u*.9,u*1.45);ctx.lineTo(-u*1.8,u*2);ctx.closePath();ctx.fill();ctx.fillStyle='#333254';[-.65,.65].forEach(x=>{ctx.beginPath();ctx.arc(x*u,-u*.15,u*.15,0,7);ctx.fill()})}
+ else if(motif==='flower'){ctx.fillStyle='#ff91c9';for(let i=0;i<6;i++){ctx.beginPath();ctx.arc(Math.cos(i*Math.PI/3)*u*1.25,Math.sin(i*Math.PI/3)*u*1.25,u*.82,0,7);ctx.fill()}ctx.fillStyle='#ffda7c';ctx.beginPath();ctx.arc(0,0,u*.75,0,7);ctx.fill()}
+ else if(motif==='rocket'){ctx.fillStyle='#96f6e5';ctx.beginPath();ctx.moveTo(0,-u*2.8);ctx.quadraticCurveTo(u*1.8,-u*1, u*1.2,u*1.4);ctx.lineTo(-u*1.2,u*1.4);ctx.quadraticCurveTo(-u*1.8,-u*1,0,-u*2.8);ctx.fill();ctx.fillStyle='#ff8bbb';ctx.beginPath();ctx.arc(0,-u*.55,u*.48,0,7);ctx.fill();ctx.fillStyle='#ffcf73';ctx.beginPath();ctx.moveTo(-u*.6,u*1.3);ctx.lineTo(0,u*2.8);ctx.lineTo(u*.6,u*1.3);ctx.fill()}
+ else if(motif==='cloud'){ctx.fillStyle='#a6f5f1';ctx.beginPath();ctx.arc(-u,0,u*1.1,0,7);ctx.arc(0,-u*.75,u*1.45,0,7);ctx.arc(u,0,u*1.05,0,7);ctx.rect(-u,u*.1,u*2,u*1);ctx.fill()}
+ else if(motif==='game'){ctx.fillStyle='#92f2dc';ctx.beginPath();ctx.roundRect(-u*2.4,-u*1.45,u*4.8,u*2.9,u*.6);ctx.fill();ctx.fillStyle='#303252';ctx.fillRect(-u*1.6,-u*.25,u*1.2,u*.35);ctx.fillRect(-u*1.15,-u*.7,u*.35,u*1.2);ctx.fillStyle='#ff83b7';ctx.beginPath();ctx.arc(u*1.05,-u*.35,u*.22,0,7);ctx.arc(u*1.55,u*.35,u*.22,0,7);ctx.fill()}
+ else{ctx.fillStyle='#ffd77d';ctx.save();ctx.rotate(Math.PI/4);ctx.fillRect(-u*1.8,-u*1.8,u*3.6,u*3.6);ctx.restore();ctx.fillStyle='#fff1b7';ctx.beginPath();ctx.arc(0,0,u*.58,0,7);ctx.fill()}
+ ctx.restore();
+ // tiny sparkles behind the soil layer
+ ctx.fillStyle='#ffffff77';for(let i=0;i<20;i++){const x=((i*43+level*13)%97)/97*w,y=((i*71+level*9)%97)/97*h;ctx.fillRect(x,y,2,2)}
+}
+function render(){if(!ctx||!canvas.width)return;const dpr=Math.max(1,window.devicePixelRatio||1),w=canvas.width/dpr,h=canvas.height/dpr,u=w/COLS;drawMotif();
+ for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){const i=r*COLS+c,cell=grid[i],x=c*u,y=r*u;if(!cell)continue;
+  if(cell.type==='wall'){ctx.fillStyle='#171827';ctx.fillRect(x,y,u,u);ctx.fillStyle='#4b4d65';ctx.fillRect(x+u*.16,y+u*.12,u*.68,u*.76);ctx.fillStyle='#71738b';ctx.fillRect(x+u*.2,y+u*.18,u*.6,u*.12);continue}
+  if(cell.stage>0){ctx.fillStyle=cell.type==='stain'?'#514c55':'#5b5e70';ctx.globalAlpha=cell.type==='stain'?.98:.93;ctx.fillRect(x+.4,y+.4,u-.8,u-.8);ctx.globalAlpha=1;
+   // Grain gives the dirty pixel layer a tactile, speckled surface.
+   const n=cell.type==='stain'?7:4;for(let j=0;j<n;j++){const px=x+u*((j*37+(cell.seed||0)*100)%83)/100,py=y+u*((j*61+(cell.seed||0)*100)%81)/100;ctx.fillStyle=j%2?'#8a8b99':'#414352';ctx.globalAlpha=.48;ctx.fillRect(px,py,Math.max(1,u*.09),Math.max(1,u*.09))}ctx.globalAlpha=1;
+   if(cell.type==='stain'){ctx.fillStyle='#ffca76';ctx.globalAlpha=.55;ctx.fillRect(x+u*.22,y+u*.22,u*.56,u*.56);ctx.globalAlpha=1}
+  }
+  if(cell.type==='ice'){ctx.strokeStyle='#9ceaff88';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+u*.2,y+u*.75);ctx.lineTo(x+u*.75,y+u*.2);ctx.stroke()}
+  if(cell.type==='arrow'){ctx.fillStyle='#fff4a8aa';ctx.beginPath();ctx.moveTo(x+u*.5,y+u*.2);ctx.lineTo(x+u*.78,y+u*.62);ctx.lineTo(x+u*.58,y+u*.62);ctx.lineTo(x+u*.58,y+u*.82);ctx.lineTo(x+u*.42,y+u*.82);ctx.lineTo(x+u*.42,y+u*.62);ctx.lineTo(x+u*.22,y+u*.62);ctx.closePath();ctx.fill()}
+ }
+ // quiet grid lines
+ ctx.strokeStyle='#ffffff14';ctx.lineWidth=1;for(let c=0;c<=COLS;c++){ctx.beginPath();ctx.moveTo(c*u,0);ctx.lineTo(c*u,h);ctx.stroke()}for(let r=0;r<=ROWS;r++){ctx.beginPath();ctx.moveTo(0,r*u);ctx.lineTo(w,r*u);ctx.stroke()}
+ if(drawing&&lastPoint){ctx.beginPath();ctx.arc(lastPoint.x,lastPoint.y,tools[selected].radius*u,0,Math.PI*2);ctx.strokeStyle='rgba(137,255,229,.48)';ctx.lineWidth=2;ctx.stroke()}
+}
+function updateUI(){const clean=grid.filter(x=>x.type!=='wall').reduce((n,x)=>n+(x.stage===0?1:0),0),total=grid.filter(x=>x.type!=='wall').length;cleanPct=total?Math.floor(clean/total*100):0;$('levelText').textContent=`${level} / ${LEVELS}`;$('movesText').textContent=`${moves} / ${maxMoves+extraMoves}`;$('cleanText').textContent=`${cleanPct}%`;$('progress').style.width=cleanPct+'%';}
+function pos(e){const rect=canvas.getBoundingClientRect();return{x:e.clientX-rect.left,y:e.clientY-rect.top}}
+function cleanAt(p){const u=canvas.getBoundingClientRect().width/COLS,rad=tools[selected].radius*u,cc=Math.floor(p.x/u),rr=Math.floor(p.y/u),range=Math.ceil(rad/u);let changed=false;
+ for(let r=Math.max(0,rr-range);r<=Math.min(ROWS-1,rr+range);r++)for(let c=Math.max(0,cc-range);c<=Math.min(COLS-1,cc+range);c++){const i=r*COLS+c,cell=grid[i],cx=(c+.5)*u,cy=(r+.5)*u;if(!cell||cell.type==='wall'||cell.stage===0||Math.hypot(p.x-cx,p.y-cy)>rad+u*.43)continue;if(strokeCells.has(i))continue;strokeCells.add(i);cell.stage--;changed=true}
+ if(changed){updateUI();if(audioOn)playSweep();if(vibeOn&&navigator.vibrate&&Date.now()-lastSound>120)navigator.vibrate(7)}
+}
+function pointerDown(e){if(completed)return;e.preventDefault();canvas.setPointerCapture?.(e.pointerId);drawing=true;strokeCells=new Set();lastPoint=pos(e);cleanAt(lastPoint);render()}
+function pointerMove(e){if(!drawing)return;e.preventDefault();const p=pos(e),u=canvas.getBoundingClientRect().width/COLS,dist=Math.hypot(p.x-lastPoint.x,p.y-lastPoint.y),steps=Math.max(1,Math.ceil(dist/(u*.22)));for(let i=1;i<=steps;i++){const t=i/steps;cleanAt({x:lastPoint.x+(p.x-lastPoint.x)*t,y:lastPoint.y+(p.y-lastPoint.y)*t})}lastPoint=p;render()}
+function pointerUp(e){if(!drawing)return;drawing=false;lastPoint=null;moves++;render();updateUI();if(cleanPct>=92){finish(true)}else if(moves>=maxMoves+extraMoves){finish(false)}}
+function finish(win){completed=win;$('overlay').classList.add('show');$('resultTitle').textContent=win?(cleanPct===100?'Pixel-perfekt!':'Sauber!'):'Fast geschafft!';$('resultText').textContent=win?`${cleanPct}% sauber · ${moves} Wischzüge · Level ${level} geschafft.`:`${cleanPct}% sauber. Noch ein ruhiger Versuch?`;$('continueBtn').textContent=win?(level>=LEVELS?'Nochmal spielen':'Weiter'):'Weiter versuchen';if(win){if(audioOn)playComplete();if(vibeOn&&navigator.vibrate)navigator.vibrate([12,25,18]);if(level<LEVELS){level++;localStorage.setItem('pc_level',level)}}}
+function restart(){makeLevel();toast('Level neu gestartet')}
+function next(){if(completed&&level>LEVELS){level=1;localStorage.setItem('pc_level',level)}makeLevel()}
+function showToast(t){const el=$('toast');el.textContent=t;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1900)}
+function toast(t){showToast(t)}
+function getAudio(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx}
+function playSweep(){try{const now=Date.now();if(now-lastSound<85)return;lastSound=now;const ac=getAudio(),osc=ac.createOscillator(),gain=ac.createGain();osc.type=tools[selected].wave;osc.frequency.setValueAtTime(tools[selected].tone+(Math.random()*45),ac.currentTime);osc.frequency.exponentialRampToValueAtTime(tools[selected].tone*.78,ac.currentTime+.075);gain.gain.setValueAtTime(.0001,ac.currentTime);gain.gain.exponentialRampToValueAtTime(.025,ac.currentTime+.012);gain.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+.09);osc.connect(gain);gain.connect(ac.destination);osc.start();osc.stop(ac.currentTime+.1)}catch(_){}}
+function playComplete(){try{const ac=getAudio();[523,659,784].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,ac.currentTime+i*.11);g.gain.exponentialRampToValueAtTime(.07,ac.currentTime+i*.11+.025);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+i*.11+.32);o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+i*.11);o.stop(ac.currentTime+i*.11+.34)})}catch(_){}}
+function buildTools(){const box=$('tools');tools.forEach((t,i)=>{const b=document.createElement('button');b.className='tool'+(i===selected?' selected':'');b.innerHTML=`<span class="emoji">${t.icon}</span>${t.name}`;b.setAttribute('aria-label',`${t.name}: ${t.tip}`);b.addEventListener('click',()=>{selected=i;document.querySelectorAll('.tool').forEach((x,j)=>x.classList.toggle('selected',j===i));$('toolTip').textContent=t.tip;toast(`${t.name} ausgewählt`)});box.appendChild(b)})}
+canvas.addEventListener('pointerdown',pointerDown);canvas.addEventListener('pointermove',pointerMove);canvas.addEventListener('pointerup',pointerUp);canvas.addEventListener('pointercancel',pointerUp);$('restartBtn').addEventListener('click',restart);$('replayBtn').addEventListener('click',restart);$('continueBtn').addEventListener('click',()=>{if(completed)next();else{$('overlay').classList.remove('show');restart()}});
+$('hintBtn').addEventListener('click',()=>{toast('Tipp: Wische in langen, überlappenden Bahnen.');if(vibeOn&&navigator.vibrate)navigator.vibrate(10)});
+$('bonusBtn').addEventListener('click',()=>{extraMoves+=2;updateUI();toast('Demo-Belohnung: +2 Extra-Züge (keine Anzeige geladen)')});
+$('soundBtn').addEventListener('click',()=>{$('soundBtn').textContent=audioOn?'🔇':'🔊';audioOn=!audioOn;if(audioOn)playSweep();toast(audioOn?'Sound an':'Sound aus')});$('vibeBtn').addEventListener('click',()=>{$('vibeBtn').textContent=vibeOn?'📴':'📳';vibeOn=!vibeOn;toast(vibeOn?'Vibration an':'Vibration aus')});
+window.addEventListener('resize',resize);buildTools();makeLevel();resize();
+})();
+</script>
+</body>
+</html>
